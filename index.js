@@ -52,5 +52,14 @@ function promptUser() {
 }
 
 function viewDepartment () {
-    connection.query("SELECT ")
+    connection.query("SELECT id, deparment_name FROM department", (err, results) => {
+        if(err) throw err;
+        console.log('\n');
+        console.table(results);
+        promptUser()
+    })
+}
+
+function viewRole() {
+    connection.query("SELECTION roles.id, roles.job_title, department.department_name AS department, roles.salary FROM roles JOIN department ON roles.department")
 }

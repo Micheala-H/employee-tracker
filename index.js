@@ -32,7 +32,7 @@ function promptUser() {
                 viewEmployee();
             break;
             case "Add new role":
-                viewRole();
+                addRole();
             break;
             case "Add new Department":
                 addDepartment();
@@ -61,5 +61,40 @@ function viewDepartment () {
 }
 
 function viewRole() {
-    connection.query("SELECTION roles.id, roles.job_title, department.department_name AS department, roles.salary FROM roles JOIN department ON roles.department")
+    connection.query("SELECTION roles.id, roles.job_title, department.department_name AS department, roles.salary FROM roles JOIN department ON roles.department", (err, results) => {
+        if(err) throw err;
+        console.log('\n');
+        console.table(results);
+        promptUser()
+    })
+
+}
+
+function viewEmployee() {
+
+}
+
+function  addRole() {
+    connection.query("SELECT * FROM department", (err, department) => {
+        if (err) throw err;
+
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "title"
+            }
+        ])
+    })
+}
+
+function addDepartment(){
+
+}
+
+function addEmployee(){
+
+}
+
+function updateEmployeeRole() {
+
 }
